@@ -4,7 +4,7 @@ author        = "Thomas T. Jarløv (https://github.com/ThomasTJdev)"
 description   = "Nimble with GUI"
 license       = "MIT"
 bin           = @["nimblegui"]
-#skipDirs      = @["src"]
+skipDirs      = @["private"]
 
 
 # Dependencies
