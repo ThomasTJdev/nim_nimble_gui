@@ -5,11 +5,11 @@ description   = "Nimble with GUI"
 license       = "MIT"
 bin           = @["nimblegui"]
 skipDirs      = @["private"]
-
+skipExt       = @["glade"]
 
 # Dependencies
 requires "nim >= 0.18.1"
-requires "uibuilder >= 0.1.0"
+requires "uibuilder >= 0.2.1"
 requires "ui >= 0.9.2"
 
 
