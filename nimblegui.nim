@@ -1,91 +1,78 @@
-import ui, uibuilder, osproc, os
+import ui, osproc, os, ospaths, uibuilderpkg/codegen
 
-var builder = newBuilder()
-builder.load(getAppDir() & "/nimbleguipkg/nimblegui.glade")
+const path = joinPath(staticExec("pwd"), "nimbleguipkg/nimblegui.glade")
 
-var winMain       = (Window)builder.getWidgetById("mainWin")
-var winInfo       = (Window)builder.getWidgetById("mainInfoWin")
-var winInput      = (Window)builder.getWidgetById("mainInputWin")
-var btnInfo       = (Button)builder.getWidgetById("btnInfo")
-var btnInputGo    = (Button)builder.getWidgetById("btnInputGo")
-var btnInstall    = (Button)builder.getWidgetById("btnInstall")
-var btnInstalled  = (Button)builder.getWidgetById("btnInstalled")
-var btnAllPackages  = (Button)builder.getWidgetById("btnAllPackages")
-var btnNimbleVersion = (Button)builder.getWidgetById("btnNimbleVersion")
-var btnRefresh    = (Button)builder.getWidgetById("btnRefresh")
-var btnRemove     = (Button)builder.getWidgetById("btnRemove")
-var btnSearch     = (Button)builder.getWidgetById("btnSearch")
-var entryMain     = (Entry)builder.getWidgetById("entryMain")
-var infoText      = (MultilineEntry)builder.getWidgetById("infoText")
+init()
 
-winInfo.hide()
-winInput.hide()
+build(path)
+
+mainInfoWin.hide()
+mainInputWin.hide()
 
 var choice = ""
 var entryMainValue = ""
 
-
 btnRefresh.onclick = proc() =
   choice = "refresh"
-  winMain.msgBox("Nimble", execProcess("nimble refresh"))
+  mainWin.msgBox("Nimble", execProcess("nimble refresh"))
 
 btnInstalled.onclick = proc() =
   choice = "list -i"
-  winInfo.show()
+  mainInfoWin.show()
   infoText.text = choice
   infoText.text = execProcess("nimble list -i")
 
 btnAllPackages.onclick = proc() =
   choice = "list"
-  winInfo.show()
+  mainInfoWin.show()
   infoText.text = choice
   infoText.text = execProcess("nimble list")
 
 btnNimbleVersion.onclick = proc() =
   choice = "version"
-  winMain.msgBox("Nimble version", "Nimble:\n" & execProcess("nimble --version") & "\nNim:\n" & execProcess("nim --version") )
+  mainWin.msgBox("Nimble version", "Nimble:\n" & execProcess("nimble --version") & "\nNim:\n" & execProcess("nim --version") )
 
 #
 # Use btnInputGo.onclick
 #
 btnInstall.onclick = proc() =
   choice = "install"
-  winInput.show()
+  mainInputWin.show()
 
 btnRemove.onclick = proc() =
   choice = "remove"
-  winInput.show()
+  mainInputWin.show()
 
 btnSearch.onclick = proc() =
   choice = "search"
-  winInput.show()
+  mainInputWin.show()
 
 btnInfo.onclick = proc() =
   choice = "info"
-  winInput.show()
+  mainInputWin.show()
 
 btnInputGo.onclick = proc() =
   entryMainValue = entryMain.text
   infoText.text = choice
-  winInput.hide()
+  mainInputWin.hide()
 
   case choice
 
   of "info":
-    winInfo.hide()
+    mainInfoWin.hide()
     let info = execProcess("nimble search " & entryMain.text & " --ver")
     let path = execProcess("cd;nimble path " & entryMain.text)
-    winMain.msgBox("Package info", "Package info:\n" & info & "\nInstall path:\n" & path)
+    mainWin.msgBox("Package info", "Package info:\n" & info & "\nInstall path:\n" & path)
 
   of "install", "remove":
-    winInfo.show()
+    mainInfoWin.show()
     let output = execProcess("nimble " & choice & " " & entryMain.text & " -y")
     infoText.text = output
 
   else:
-    winInfo.show()
+    mainInfoWin.show()
     let output = execProcess("nimble " & choice & " " & entryMain.text)
     infoText.text = output
 
 
-builder.run()
+mainLoop()
