@@ -9,5 +9,3 @@ ____
 **Screenshots:**
 
 ![Main](private/screenshot1.png)
-
-![Info](private/screenshot2.png)
