@@ -1,0 +1,25 @@
+<fieldset>
+  <legend>Input</legend>
+  <label>Standard Input
+  <input id="in" placeholder="Type your options..." style="width:99%">
+  </label>
+</fieldset>
+<fieldset>
+  <legend>Nimble commands</legend>
+  <button id="nimbleSearch" onclick="api.nimbleSearch(document.querySelector('#in').value.trim())">Search</button>
+  <button id="nimbleDump" onclick="api.nimbleDump(document.querySelector('#in').value.trim())">Dump</button>
+  <button id="nimbleListInstalled" onclick="api.nimbleListInstalled()">List Installed</button>
+  <button id="nimbleListAll" onclick="api.nimbleListAll()">List All</button>
+  <button id="nimblePath" onclick="api.nimblePath(document.querySelector('#in').value.trim())">Path</button>
+  <button id="nimbleInstall" onclick="api.nimbleInstall(document.querySelector('#in').value.trim())">Install</button>
+  <button id="nimbleRemove" onclick="api.nimbleRemove(document.querySelector('#in').value.trim())">Remove</button>
+  <button id="nimbleReinstall" onclick="api.nimbleReinstall(document.querySelector('#in').value.trim())">Reinstall</button>
+  <button id="nimbleVersion" onclick="api.nimbleVersion()">Version</button>
+  <button id="nimbleRefresh" onclick="api.nimbleRefresh()">Refresh</button>
+</fieldset>
+<fieldset>
+  <legend>Results</legend>
+  <label>Standard Output Messages
+  <textarea id="output" placeholder="Standard Output Messages (Read-Only)" rows=12 readonly ></textarea>
+  </label>
+</fieldset>
