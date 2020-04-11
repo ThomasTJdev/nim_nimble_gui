@@ -3,7 +3,7 @@ import os, osproc, webgui
 let app = newWebView(currentHtmlPath(), title = "Nimble GUI", height = 666)
 
 template justDoIt(command: string) =
-  app.js(app.addText("#output", "\n" & execProcess("nimble --noColor " & command)))
+  app.js(app.addText("#output", execProcess("nimble --noColor " & command) & "\n"))
 
 app.bindProcs("api"):
   proc nimbleRefresh()            = justDoIt "-y refresh"
