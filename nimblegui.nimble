@@ -1,5 +1,5 @@
 # Package
-version       = "0.2.1"
+version       = "0.2.2"
 author        = "Thomas T. Jarløv (https://github.com/ThomasTJdev)"
 description   = "Nimble with GUI"
 license       = "MIT"

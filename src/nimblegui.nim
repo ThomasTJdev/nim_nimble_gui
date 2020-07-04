@@ -1,6 +1,10 @@
 import os, osproc, webgui
 
-let app = newWebView(currentHtmlPath(), title = "Nimble GUI", height = 666)
+const
+  index = staticRead("index.html")
+
+let
+  app = newWebView(index, title = "Nimble GUI", height = 666)
 
 template justDoIt(button, command: string) =
   app.js("document.querySelector('#" & button & "').disabled = true;" &
